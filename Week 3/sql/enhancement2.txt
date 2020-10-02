@@ -1,1 +1,15 @@
--- Queries here
+INSERT INTO phpmotors.clients (clientFirstname, clientLastname, clientEmail, clientPassword, `comment`)
+VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n', 'I am the real Ironman');
+
+UPDATE phpmotors.clients SET clientLevel = 3 WHERE clientId = 1;
+
+UPDATE phpmotors.inventory SET invDescription = REPLACE(invDescription, 'small interior', 'spacious interior') WHERE invId = 12;
+
+SELECT invModel
+FROM phpmotors.inventory i
+INNER JOIN phpmotors.carclassification c ON c.classificationId = i.classificationId
+WHERE c.classificationName = 'SUV';
+
+DELETE FROM phpmotors.inventory WHERE invId = 1;
+
+UPDATE phpmotors.inventory SET invImage = CONCAT('/phpmotors', invImage);

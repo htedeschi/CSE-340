@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Server Error | PHP Motors</title>
 
-    <link rel="stylesheet" media="screen" href="../assets/enhancement2.txtcss/template.css">
+    <link rel="stylesheet" media="screen" href="../assets/css/template.css">
 </head>
 
 <body>

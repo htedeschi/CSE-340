@@ -19,4 +19,5 @@ function phpmotorsConnect()
         exit;
     }
 }
+# testing the connect
 phpmotorsConnect();
