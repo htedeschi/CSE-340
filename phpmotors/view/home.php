@@ -8,21 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Motors <?php echo ($currentPage ? " - " . strtoupper($currentPage) : "") ?></title>
 
-    <link rel="stylesheet" media="screen" href="../assets/css/template.css">
-    <link rel="stylesheet" media="screen" href="../assets/css/home.css">
+    <link rel="stylesheet" media="screen" href="./assets/css/template.css">
+    <link rel="stylesheet" media="screen" href="./assets/css/home.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="top">
-            <div id="div-logo">
-                <img src="../assets/images/site/logo.png" alt="PHP Motors Logo" />
-            </div>
-            <div id="div-my-account">
-                <a href="#">My Account</a>
-            </div>
-        </div>
-        <?php require_once '../includes/nav.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/nav.php' ?>
         <div class="content">
             <main>
                 <h1>Welcome to PHP Motors!</h1>
@@ -38,26 +30,26 @@
                             <a class="a-cta-btn" href="#">Own Today</a>
                         </div>
 
-                        <img class="img-vehicle" src="../assets/images/delorean.jpg" alt="DMC Delorean" />
+                        <img class="img-vehicle" src="./assets/images/delorean.jpg" alt="DMC Delorean" />
                     </div>
                     <div class="div-vehicle-extra">
                         <div class="div-vehicle-upgrades">
                             <h3>DMC Delorean Upgrades</h3>
                             <div class="div-upgrades-buttons">
                                 <div class="div-upgrade-btn">
-                                    <img src="../assets/images/upgrades/flux-cap.png" alt="Icon for flux capacitor">
+                                    <img src="./assets/images/upgrades/flux-cap.png" alt="Icon for flux capacitor">
                                     <a href="#">Flux Capacitor</a>
                                 </div>
                                 <div class="div-upgrade-btn">
-                                    <img src="../assets/images/upgrades/flame.jpg" alt="Icon for flame">
+                                    <img src="./assets/images/upgrades/flame.jpg" alt="Icon for flame">
                                     <a href="#">Flame Decals</a>
                                 </div>
                                 <div class="div-upgrade-btn">
-                                    <img src="../assets/images/upgrades/bumper_sticker.jpg" alt="Icon for bumper sticker">
+                                    <img src="./assets/images/upgrades/bumper_sticker.jpg" alt="Icon for bumper sticker">
                                     <a href="#">Bumper Stickers</a>
                                 </div>
                                 <div class="div-upgrade-btn">
-                                    <img src="../assets/images/upgrades/hub-cap.jpg" alt="Icon for hub cap">
+                                    <img src="./assets/images/upgrades/hub-cap.jpg" alt="Icon for hub cap">
                                     <a href="#">Hub caps</a>
                                 </div>
                             </div>
@@ -77,7 +69,7 @@
             </main>
         </div>
 
-        <?php require_once '../includes/footer.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/footer.php' ?>
     </div>
 </body>
 

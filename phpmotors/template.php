@@ -19,7 +19,7 @@
                 <a href="#">My Account</a>
             </div>
         </div>
-        <?php require_once './includes/nav.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/nav.php' ?>
         <div class="content">
             <h1>Content Title Here</h1>
             <main>
@@ -27,7 +27,7 @@
             </main>
         </div>
 
-        <?php require_once './includes/footer.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/footer.php' ?>
     </div>
 </body>
 

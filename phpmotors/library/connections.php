@@ -15,7 +15,7 @@ function phpmotorsConnect()
         $link = new PDO($dsn, $username, $password, $options);
         return $link;
     } catch (PDOException $e) {
-        header("Location: ../views/500.php");
+        header("Location: ../view/500.php");
         exit;
     }
 }

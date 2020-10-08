@@ -16,14 +16,14 @@
                 <img src="../assets/images/site/logo.png" alt="PHP Motors Logo" />
             </div>
             <div id="div-my-account">
-                <a href="#">My Account</a>
+                <a href="/CSE-340/phpmotors/accounts/?action=login">My Account</a>
             </div>
         </div>
         <?php require_once '../includes/nav.php' ?>
         <div class="content">
             <main>
-            <h1>Server Error</h1>
-            <p>Sorry, our server seems to be experiencing some technical difficulties. Please check back later.</p>
+                <h1>Server Error</h1>
+                <p>Sorry, our server seems to be experiencing some technical difficulties. Please check back later.</p>
             </main>
         </div>
 
