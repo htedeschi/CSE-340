@@ -14,7 +14,7 @@
 
 <body>
     <div class="container">
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/nav.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/nav.php' ?>
         <div class="content">
             <main>
                 <h1>Welcome to PHP Motors!</h1>
@@ -69,7 +69,7 @@
             </main>
         </div>
 
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/footer.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/footer.php' ?>
     </div>
 </body>
 

@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/nav.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/nav.php' ?>
         <div class="content">
             <h1>Login</h1>
             <main>
@@ -32,11 +32,11 @@
                     <span class="muted red">* = Field required</span>
                 </form>
                 <br><br>
-                <a class="a-register" href="/CSE-340/phpmotors/accounts/?action=login">Go back to Login</a>
+                <a class="a-register" href="/phpmotors/accounts/?action=login">Go back to Login</a>
             </main>
         </div>
 
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/footer.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/footer.php' ?>
     </div>
 </body>
 

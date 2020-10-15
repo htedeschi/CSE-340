@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/nav.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/nav.php' ?>
         <div class="content">
             <h1>Login</h1>
             <main>
@@ -24,11 +24,11 @@
                     <input type="submit" value="Login">
                 </form>
                 <br>
-                <a class="a-register" href="/CSE-340/phpmotors/accounts/?action=register">Register here</a>
+                <a class="a-register" href="/phpmotors/accounts/?action=register">Register here</a>
             </main>
         </div>
 
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/CSE-340/phpmotors/includes/footer.php' ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/footer.php' ?>
     </div>
 </body>
 

@@ -3,7 +3,7 @@
 function phpmotorsConnect()
 {
     $server = 'localhost';
-    $port = '3307';
+    $port = '3306';
     $dbname = 'phpmotors';
     $username = 'iClient';
     $password = '3gd3z2Ek76wxyW4c';
@@ -15,7 +15,7 @@ function phpmotorsConnect()
         $link = new PDO($dsn, $username, $password, $options);
         return $link;
     } catch (PDOException $e) {
-        header("Location: ../view/500.php");
+        header("Location: /phpmotors/view/500.php");
         exit;
     }
 }
