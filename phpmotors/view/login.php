@@ -16,6 +16,12 @@
         <div class="content">
             <h1>Login</h1>
             <main>
+                <?php
+                if (isset($message)) {
+                    echo $message;
+                }
+                ?>
+
                 <form action="#" method="post">
                     <label for="clientEmail">Email:</label><br>
                     <input type="email" id="clientEmail" name="clientEmail" value="" autofocus required><br>

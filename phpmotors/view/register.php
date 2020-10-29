@@ -16,13 +16,23 @@
         <div class="content">
             <h1>Login</h1>
             <main>
-                <form action="#" method="post">
+
+                <?php
+                if (isset($message)) {
+                    echo $message;
+                }
+                ?>
+
+                <form action="/phpmotors/accounts/index.php" method="post">
+                    <!-- action name for registering -->
+                    <input type="hidden" name="action" value="registerPost">
+
                     <label for="clientFirstname">* First Name:</label><br>
                     <input type="text" id="clientFirstname" name="clientFirstname" value="" autofocus><br>
                     <label for="clientLastname">* Last Name:</label><br>
                     <input type="text" id="clientLastname" name="clientLastname" value=""><br>
                     <label for="clientEmail">* Email:</label><br>
-                    <input type="email" id="clientEmail" name="clientEmail" value=""><br> 
+                    <input type="email" id="clientEmail" name="clientEmail" value=""><br>
                     <label for="clientPassword">* Password:</label><br>
                     <input type="password" id="clientPassword" name="clientPassword" value=""><br>
                     <label for="c_clientPassword">* Confirm Password:</label><br>

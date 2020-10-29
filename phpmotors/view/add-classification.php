@@ -16,13 +16,19 @@
         <div class="content">
             <h1>Add Classification</h1>
             <main>
+
+                <?php
+                if (isset($message)) {
+                    echo $message;
+                }
+                ?>
+
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                    <input type="hidden" name="isClassification" value="true">
+                    <!-- action name for registering -->
+                    <input type="hidden" name="action" value="addClassificationPost">
 
                     <label for="classificationName">* Classification:</label><br>
                     <input type="text" id="classificationName" name="classificationName" value="" autofocus><br>
-                    <br><br>
-                    <?php echo (isset($_GET['message']) ? $_GET['message'] : ''); ?>
                     <br><br>
                     <input type="submit" value="Add Classification">
                     <br><br>

@@ -16,35 +16,43 @@
         <div class="content">
             <h1>Add Vehicle</h1>
             <main>
+
+                <?php
+                if (isset($message)) {
+                    echo $message;
+                }
+                ?>
+
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <!-- action name for registering -->
+                    <input type="hidden" name="action" value="addVehiclePost">
+
                     <label for="classificationId">Classification</label><br>
                     <select id="classificationId" name="classificationId">
-                        <option value="" disabled selected>SELECT A CLASSIFICATION</option>
+                        <option value="" disabled <?php echo (!isset($data['classificationId']) || empty($data['classificationId'])) ? 'selected' : '' ?>>SELECT A CLASSIFICATION</option>
                         <?php
-                        foreach($classificationList as $key => $value){
-                            echo '<option value="'.$key.'">'.$value.'</option>';
+                        foreach ($classificationList as $key => $value) {
+                            echo '<option value="' . $key . '"' . (isset($data['classificationId']) && !empty($data['classificationId']) && $data['classificationId'] ==  $key ? 'selected' : '') . '>' . $value . '</option>';
                         }
-                        ?>                        
+                        ?>
                     </select>
                     <br>
                     <label for="invMake">* Make:</label><br>
-                    <input type="text" id="invMake" name="invMake" value="" autofocus><br>
+                    <input type="text" id="invMake" name="invMake" value="<?php echo (isset($data['invMake']) && !empty($data['invMake'])) ? $data['invMake'] : '' ?>" autofocus><br>
                     <label for="invModel">* Model:</label><br>
-                    <input type="text" id="invModel" name="invModel" value=""><br>
+                    <input type="text" id="invModel" name="invModel" value="<?php echo (isset($data['invModel']) && !empty($data['invModel'])) ? $data['invModel'] : '' ?>"><br>
                     <label for="invDescription">* Description:</label><br>
-                    <textarea cols="66" rows="4" name ="invDescription" id="invDescription" ></textarea><br>
+                    <textarea cols="66" rows="4" name="invDescription" id="invDescription"><?php echo (isset($data['invDescription']) && !empty($data['invDescription'])) ? $data['invDescription'] : '' ?></textarea><br>
                     <label for="invImage">Image Path:</label><br>
                     <input type="text" id="invImage" name="invImage" value="/images/no-image.png"><br>
                     <label for="invThumbnail">Thumbnail Path:</label><br>
                     <input type="text" id="invThumbnail" name="invThumbnail" value="/images/no-image.png"><br>
                     <label for="invPrice">* Price:</label><br>
-                    <input type="number" min="0" id="invPrice" name="invPrice" value=""><br>
+                    <input type="number" min="0" id="invPrice" name="invPrice" value="<?php echo (isset($data['invPrice']) && !empty($data['invPrice'])) ? $data['invPrice'] : '' ?>"><br>
                     <label for="invStock">* Number in Stock:</label><br>
-                    <input type="number" min="0" id="invStock" name="invStock" value=""><br>
+                    <input type="number" min="0" id="invStock" name="invStock" value="<?php echo (isset($data['invStock']) && !empty($data['invStock'])) ? $data['invStock'] : '' ?>"><br>
                     <label for="invColor">* Color:</label><br>
-                    <input type="text" id="invColor" name="invColor" value=""><br>
-                    <br>
-                    <?php echo (isset($_GET['message']) ? $_GET['message'] : ''); ?>
+                    <input type="text" id="invColor" name="invColor" value="<?php echo (isset($data['invColor']) && !empty($data['invColor'])) ? $data['invColor'] : '' ?>"><br>
                     <br><br>
                     <input type="submit" value="Add Vehicle">
                     <br><br>
