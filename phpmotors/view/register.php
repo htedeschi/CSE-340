@@ -14,7 +14,7 @@
     <div class="container">
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/nav.php' ?>
         <div class="content">
-            <h1>Login</h1>
+            <h1>Register</h1>
             <main>
 
                 <?php
@@ -28,15 +28,22 @@
                     <input type="hidden" name="action" value="registerPost">
 
                     <label for="clientFirstname">* First Name:</label><br>
-                    <input type="text" id="clientFirstname" name="clientFirstname" value="" autofocus><br>
+                    <input type="text" id="clientFirstname" name="clientFirstname" value="<?php echo (isset($clientFirstname) ? $clientFirstname : ''); ?>" autofocus required><br>
+
                     <label for="clientLastname">* Last Name:</label><br>
-                    <input type="text" id="clientLastname" name="clientLastname" value=""><br>
+                    <input type="text" id="clientLastname" name="clientLastname" value="<?php echo (isset($clientLastname) ? $clientLastname : ''); ?>" required><br>
+
                     <label for="clientEmail">* Email:</label><br>
-                    <input type="email" id="clientEmail" name="clientEmail" value=""><br>
+                    <input type="email" id="clientEmail" name="clientEmail" value="<?php echo (isset($clientEmail) ? $clientEmail : ''); ?>" required><br>
+
+
                     <label for="clientPassword">* Password:</label><br>
-                    <input type="password" id="clientPassword" name="clientPassword" value=""><br>
+                    <span class="muted">There must be 8 characters, any of which may be numbers, any may be non-alphanumeric characters, they may be in any order and can include any number of capital and lower case letters.</span><br>
+                    <input type="password" id="clientPassword" name="clientPassword" value="" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br>
+
                     <label for="c_clientPassword">* Confirm Password:</label><br>
-                    <input type="password" id="c_clientPassword" name="c_clientPassword" value=""><br><br>
+                    <input type="password" id="c_clientPassword" name="c_clientPassword" value="" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br><br>
+
                     <input type="submit" value="Register">
                     <br><br>
                     <span class="muted red">* = Field required</span>

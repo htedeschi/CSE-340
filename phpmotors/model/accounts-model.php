@@ -29,3 +29,25 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+# checkExistingEmail() will check if there is already an existing email registered
+function checkExistingEmail($clientEmail)
+{
+    // Create a connection object using the phpmotors connection function
+    $db = phpmotorsConnect();
+
+    // The SQL statement
+    $sql = 'SELECT `clientEmail` FROM`phpmotors`.`clients`  WHERE `clientEmail` = :clientEmail';
+
+    // Create the prepared statement using the phpmotors connection
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $matchEmail = $stmt->fetch(PDO::FETCH_NUM);
+
+    $stmt->closeCursor();
+
+    // if it's not empty, there's an email registered.
+    return !empty($matchEmail);
+}

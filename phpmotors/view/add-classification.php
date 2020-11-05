@@ -28,7 +28,7 @@
                     <input type="hidden" name="action" value="addClassificationPost">
 
                     <label for="classificationName">* Classification:</label><br>
-                    <input type="text" id="classificationName" name="classificationName" value="" autofocus><br>
+                    <input type="text" id="classificationName" name="classificationName" value="<?php echo (isset($classificationName) && !empty($classificationName)) ? $classificationName : '' ?>" autofocus  required><br>
                     <br><br>
                     <input type="submit" value="Add Classification">
                     <br><br>

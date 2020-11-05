@@ -23,10 +23,16 @@
                 ?>
 
                 <form action="#" method="post">
+                    <!-- action name for registering -->
+                    <input type="hidden" name="action" value="loginPost">
+
                     <label for="clientEmail">Email:</label><br>
-                    <input type="email" id="clientEmail" name="clientEmail" value="" autofocus required><br>
+                    <input type="email" id="clientEmail" name="clientEmail" value="<?php echo (isset($clientEmail) ? $clientEmail : ''); ?>" autofocus required><br>
+
                     <label for="clientPassword">Password:</label><br>
-                    <input type="password" id="clientPassword" name="clientPassword" value="" required><br><br>
+                    <span class="muted">There must be 8 characters, any of which may be numbers, any may be non-alphanumeric characters, they may be in any order and can include any number of capital and lower case letters.</span><br>
+                    <input type="password" id="clientPassword" name="clientPassword" value="" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br><br>
+
                     <input type="submit" value="Login">
                 </form>
                 <br>
