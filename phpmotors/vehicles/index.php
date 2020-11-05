@@ -10,6 +10,15 @@ require_once '../model/vehicles-model.php';
 require_once '../library/functions.php';
 
 
+// Create or access a Session
+session_start();
+
+
+// Check if user can see these pages, if not, send them back
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || intval($_SESSION['clientData']['clientLevel']) <= 1) {
+    header('Location: /phpmotors/');
+    exit;
+}
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {

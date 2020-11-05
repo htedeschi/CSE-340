@@ -20,7 +20,12 @@
                 if (isset($message)) {
                     echo $message;
                 }
+
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
                 ?>
+
 
                 <form action="#" method="post">
                     <!-- action name for registering -->

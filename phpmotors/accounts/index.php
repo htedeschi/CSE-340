@@ -10,6 +10,9 @@ require_once '../model/accounts-model.php';
 require_once '../library/functions.php';
 
 
+// Create or access a Session
+session_start();
+
 $buildNavigation = getClassifications();
 
 // Build a navigation bar using the $classifications array
@@ -37,7 +40,7 @@ switch ($action) {
 
         // Check for missing data
         if (empty($clientEmail) || empty($clientPassword)) {
-            $message = '<p>Please provide information for all empty form fields.</p>';
+            $message = '<p>Please provide a valid email address and password.</p>';
             include '../view/login.php';
             exit;
         }
@@ -48,9 +51,34 @@ switch ($action) {
             exit;
         }
 
-        // Check if info matches DB to say Logged In!
-        $message = '<p>Loggged in!</p>';
-        include '../view/login.php';
+        // A valid password exists, proceed with the login process
+        // Query the client data based on the email address
+        $clientData = getClient($clientEmail);
+        // Compare the password just submitted against
+        // the hashed password for the matching client
+        $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
+        // If the hashes don't match create an error
+        // and return to the login view
+        if (!$hashCheck) {
+            $message = '<p class="notice">Please check your password and try again.</p>';
+            include '../view/login.php';
+            exit;
+        }
+        // A valid user exists, log them in
+        $_SESSION['loggedin'] = TRUE;
+        // Remove the password from the array
+        // the array_pop function removes the last
+        // element from an array
+        array_pop($clientData);
+        // Store the array into the session
+        $_SESSION['clientData'] = $clientData;
+
+
+        setcookie("firstname", $_SESSION['clientData']['clientFirstname'], strtotime("+ 1 year"), "/");
+
+        // Send them to the admin view
+        include '../view/admin.php';
+        exit;
         break;
 
     case 'register':
@@ -106,8 +134,12 @@ switch ($action) {
 
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
-            include '../view/login.php';
+            setcookie("firstname", $clientFirstname, strtotime("+ 1 year"), "/");
+
+            // $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
+            $_SESSION['message'] = "Thanks for registering $clientFirstname. Please use your email and password to login.";
+            // include '../view/login.php';
+            header('Location: /phpmotors/accounts/?action=login');
             exit;
         } else {
             $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
@@ -116,8 +148,13 @@ switch ($action) {
         }
         break;
 
+    case 'logout':
+        setcookie("firstname", "", strtotime("- 1 hour"), "/");
+        session_destroy();
+        header('Location: /phpmotors/');
+        exit;
+        break;
     default:
-        include '../view/login.php';
-
+        include '../view/admin.php';
         break;
 }

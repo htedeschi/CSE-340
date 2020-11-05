@@ -4,7 +4,7 @@
 function buildNavigation($carclassifications)
 {
     // Creates navList variable and adds the Home page link
-    $navList = "<a href='/phpmotors/index.php' class='nav-item' title='View the PHP Motors home page'>Home</a>";
+    $navList = "<a href='/phpmotors/' class='nav-item' title='View the PHP Motors home page'>Home</a>";
 
     // for every item in the carclassifications, create a link and add it to navList var
     foreach ($carclassifications as $classification) {

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Motors</title>
 
-    <link rel="stylesheet" media="screen" href="./assets/css/template.css">
+    <link rel="stylesheet" media="screen" href="../assets/css/template.css">
 </head>
 
 <body>
