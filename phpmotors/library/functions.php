@@ -35,6 +35,7 @@ function sanitizeVehicle($data)
 {
     $args = array(
         'classificationName'   => FILTER_SANITIZE_STRING,
+        'invId'   => FILTER_SANITIZE_NUMBER_INT,
         'invMake'   => FILTER_SANITIZE_STRING,
         'invModel'  => FILTER_SANITIZE_STRING,
         'invDescription'  => FILTER_SANITIZE_STRING,
@@ -59,4 +60,16 @@ function checkVehicle($data)
         isset($data['invStock']) && !is_null($data['invStock']) && $data['invStock'] != '' &&
         isset($data['invColor']) && !is_null($data['invColor']) && $data['invColor'] != '' &&
         isset($data['classificationId']) && !is_null($data['classificationId']) && $data['classificationId'] != '';
+}
+
+// Build the classifications select list 
+function buildClassificationList($classifications)
+{
+    $classificationList = '<select name="classificationId" id="classificationList">';
+    $classificationList .= "<option>Choose a Classification</option>";
+    foreach ($classifications as $k => $v) {
+        $classificationList .= "<option value='$k'>$v</option>";
+    }
+    $classificationList .= '</select>';
+    return $classificationList;
 }

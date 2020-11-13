@@ -35,12 +35,12 @@ $classificationList = getClassificationsList();
 switch ($action) {
     case 'addClassification':
         include "../view/add-classification.php";
-    break;
-    
+        break;
+
     case 'addVehicle':
         include "../view/add-vehicle.php";
-    break;
-    
+        break;
+
     case 'addClassificationPost':
         $classificationName = filter_input(INPUT_POST, 'classificationName', FILTER_SANITIZE_STRING);
 
@@ -52,10 +52,10 @@ switch ($action) {
             include "../view/add-classification.php";
             exit;
         }
-        
+
         // Send the data to the model
         $regOutcome = insertClassification($classificationName);
-        
+
         // Check and report the result
         if ($regOutcome === 1) {
             header('Location: /phpmotors/vehicles/index.php');
@@ -83,7 +83,7 @@ switch ($action) {
 
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "<p>The " . $data['invMake'] . " " . $data['invModel'] . " was added successfully</p>";
+            $message = "<p class='green'>The " . $data['invMake'] . " " . $data['invModel'] . " was added successfully</p>";
             unset($data);
             include "../view/add-vehicle.php";
             exit;
@@ -93,7 +93,91 @@ switch ($action) {
             exit;
         }
         break;
+
+        /* * ********************************** 
+    * Get vehicles by classificationId 
+    * Used for starting Update & Delete process 
+    * ********************************** */
+    case 'getInventoryItems':
+        // Get the classificationId 
+        $classificationId = filter_input(INPUT_GET, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
+        // Fetch the vehicles by classificationId from the DB 
+        $inventoryArray = getInventoryByClassification($classificationId);
+        // Convert the array to a JSON object and send it back 
+        echo json_encode($inventoryArray);
+        break;
+
+    case 'mod':
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $invInfo = getInvItemInfo($invId);
+
+        if (!$invInfo || count($invInfo) < 1) {
+            $message = '<p>Sorry, no vehicle information could be found.</p>';
+        }
+        include '../view/vehicle-update.php';
+        exit;
+        break;
+
+    case 'updateVehicle':
+        // sanitize all the data in post
+        $data = sanitizeVehicle($_POST);
+
+        // check if valid inputs
+        if (!checkVehicle($data)) {
+            $message = '<p>Please provide information for all empty form fields.</p>';
+            include "../view/add-vehicle.php";
+            exit;
+        }
+
+        // Send the data to the model
+        $updateResult = updateVehicle($data);
+
+        // Check and report the result
+        if ($updateResult === 1) {
+            $message = "<p class='green'>The " . $data['invMake'] . " " . $data['invModel'] . " was updated successfully</p>";
+            unset($data);
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        } else {
+            $message = "<p>Sorry but updated the " . $data['invMake'] . " " . $data['invModel'] . " failed. Please try again.\nErr: $updateResult</p>";
+            include "../view/vehicle-update.php";
+            exit;
+        }
+        break;
+    case 'del':
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $invInfo = getInvItemInfo($invId);
+        if (!$invInfo || count($invInfo) < 1) {
+            $message = '<p>Sorry, no vehicle information could be found.</p>';
+        }
+        include '../view/vehicle-delete.php';
+        exit;
+        break;
+    case 'deleteVehicle':
+        // sanitize all the data in post
+        $data = sanitizeVehicle($_POST);
+
+        // Send the data to the model
+        $deleteResult = deleteVehicle($data);
+
+        // Check and report the result
+        if ($deleteResult === 1) {
+            $message = "<p class='green'>The " . $data['invMake'] . " " . $data['invModel'] . " was deleted successfully</p>";
+            unset($data);
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        } else {
+            $message = "<p>Sorry but deleting the " . $data['invMake'] . " " . $data['invModel'] . " failed. Please try again.\nErr: $deleteResult</p>";
+            unset($data);
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        }
+        break;
     default:
+        $classificationListSelect = buildClassificationList($classificationList);
         include '../view/vehicle-management.php';
 
         break;
