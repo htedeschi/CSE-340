@@ -22,17 +22,28 @@ if (!$_SESSION['loggedin']) {
         <div class="content">
             <main>
                 <h1><?php echo $_SESSION['clientData']['clientFirstname'] . " " . $_SESSION['clientData']['clientLastname']; ?></h1>
+                <p><?php echo ($_SESSION['loggedin'] ? 'You are logged in.' : ''); ?></p>
+                <?php
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
+                ?>
                 <ul>
-                    <li>Client ID: <?php echo $_SESSION['clientData']['clientId']; ?></li>
                     <li>First Name: <?php echo $_SESSION['clientData']['clientFirstname']; ?></li>
                     <li>Last Name: <?php echo $_SESSION['clientData']['clientLastname']; ?></li>
                     <li>Email: <?php echo $_SESSION['clientData']['clientEmail']; ?></li>
-                    <li>Level: <?php echo $_SESSION['clientData']['clientLevel']; ?></li>
                 </ul>
 
+                <h2>Account Management</h2>
+                <p>Use this link to update account information</p>
+                <p><a href='/phpmotors/accounts/?action=update'>Update account information</a></p>
+
                 <?php
-                if (intval($_SESSION['clientData']['clientLevel']) > 1)
+                if (intval($_SESSION['clientData']['clientLevel']) > 1) {
+                    echo "<h2>Inventory Management</h2>";
+                    echo "<p>Use this link to manage the inventory</p>";
                     echo "<p><a href='/phpmotors/vehicles/'>Vehicle Management</a></p>";
+                }
                 ?>
             </main>
         </div>
@@ -42,3 +53,4 @@ if (!$_SESSION['loggedin']) {
 </body>
 
 </html>
+<?php unset($_SESSION['message']); ?>

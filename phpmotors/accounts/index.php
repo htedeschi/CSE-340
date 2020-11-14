@@ -154,6 +154,82 @@ switch ($action) {
         header('Location: /phpmotors/');
         exit;
         break;
+
+    case 'update':
+        include '../view/client-update.php';
+        break;
+    case 'updateAccountPost':
+        $clientId = intval(filter_input(INPUT_POST, 'cliId', FILTER_SANITIZE_NUMBER_INT));
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        
+        if ($clientEmail !== $_SESSION['clientData']['clientEmail']) {
+            if (checkExistingEmail($clientEmail)) {
+                $messageUpdAcc = '<p>That email address already exists. Use a different email.</p>';
+                include '../view/client-update.php';
+                exit;
+            }
+        }
+        
+        $updateResult = updateClient($clientId, $clientFirstname, $clientLastname, $clientEmail);
+        
+        if ($updateResult > 0) {
+            $message = "<p class='green'>The user account was updated successfully</p>";
+            $_SESSION['message'] = $message;
+            // Query the client data based on the email address
+            $clientData = getClientById($clientId);
+            
+            // A valid user exists, log them in
+            $_SESSION['loggedin'] = TRUE;
+            // Remove the password from the array
+            // the array_pop function removes the last
+            // element from an array
+            array_pop($clientData);
+            // Store the array into the session
+            $_SESSION['clientData'] = $clientData;
+            
+            header('location: /phpmotors/accounts/');
+            exit;
+        } else {
+            $message = "<p class='red'>Sorry but updating the user account has failed. Please try again.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/accounts/');
+            exit;
+        }
+        
+    break;
+    case 'updatePasswrd':
+        $clientId = intval(filter_input(INPUT_POST, 'cliId', FILTER_SANITIZE_NUMBER_INT));
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+
+        // Check if password is valid
+        $checkPassword = checkPassword($clientPassword);
+
+        if (!$checkPassword) {
+            $messageUpdPwd = '<p class="red">Password does not match the requirements, try again.</p>';
+            include '../view/client-update.php';
+            exit;
+        }
+
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+        $updateResult = updateClientPassword($clientId, $hashedPassword);
+
+        if ($updateResult > 0) {
+            $message = "<p class='green'>The user password was updated successfully</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/accounts/');
+            exit;
+        } else {
+            $message = "<p class='red'>Sorry but updating the user password has failed. Please try again.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/accounts/');
+            exit;
+        }
+
+        break;
     default:
         include '../view/admin.php';
         break;
