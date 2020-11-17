@@ -187,6 +187,22 @@ switch ($action) {
 
         include '../view/classification.php';
         break;
+    case 'detail':
+        $invId = intval(filter_input(INPUT_GET, 'carId', FILTER_VALIDATE_INT));
+        $vehicle = array();
+        $vehicle = getInvItemInfo($invId);
+
+        // var_dump($vehicle);
+        // exit;
+
+        if (!$vehicle || !count($vehicle) || empty($vehicle)) {
+            $message = "<p class='notice'>Sorry, the vehicle you are looking for could not be found.</p>";
+        } else {
+            $vehicleHtml = buildVehicleDetail($vehicle);
+        }
+
+        include '../view/vehicle-detail.php';
+        break;
     default:
         $classificationListSelect = buildClassificationList($classificationList);
         include '../view/vehicle-management.php';

@@ -1,0 +1,40 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.pictures {
+    margin: 5%;
+    width: 90%;
+}
+
+.pictures img {
+    width: 100%;
+}
+
+.details {
+    margin: 0 20px 0 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .contaner {
+        display: flex;
+        flex: 0 0 auto;
+        justify-content: space-around;
+    }
+
+    .pictures {
+        margin: 5%;
+        flex: 1;
+    }
+
+    .details {
+        margin: 0 20px 0 20px;
+        flex: 1;
+    }
+}

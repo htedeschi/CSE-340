@@ -80,12 +80,36 @@ function buildVehiclesDisplay($vehicles)
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
         $dv .= '<li>';
-        $dv .= "<img class='car-thumbnail' src='/phpmotors$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+        $dv .= "<a href='/phpmotors/vehicles/?action=detail&carId=$vehicle[invId]'><img class='car-thumbnail' src='/phpmotors$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></a>";
         $dv .= '<hr>';
-        $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-        $dv .= "<span>$vehicle[invPrice]</span>";
+        $dv .= "<h2><a href='/phpmotors/vehicles/?action=detail&carId=$vehicle[invId]'>$vehicle[invMake] $vehicle[invModel]</a></h2>";
+        $dv .= "<span>\$$vehicle[invPrice]</span>";
         $dv .= '</li>';
     }
     $dv .= '</ul>';
     return $dv;
+}
+
+# builds a display of the details for the vehicle selected
+function buildVehicleDetail($vehicle)
+{
+    return "<div class='pictures'>
+                <img src='/phpmotors$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>
+            </div>
+            <div class='details'>
+                <h1>$vehicle[invMake] $vehicle[invModel]</h1>
+                <h2>\$" . number_format($vehicle['invPrice']) . "</h2>
+                <hr>
+                <h2>$vehicle[invMake] $vehicle[invModel] Details</h2>
+
+                <h3>Description</h3>
+                <p>$vehicle[invDescription]</p>
+
+                <h3>Color</h3>
+                <p>$vehicle[invColor]</p>
+
+                <h3>Qty in Stock</h3>
+                <p>$vehicle[invStock]</p>
+
+            </div>";
 }
