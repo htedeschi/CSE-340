@@ -14,11 +14,11 @@ require_once '../library/functions.php';
 session_start();
 
 
-// Check if user can see these pages, if not, send them back
-if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || intval($_SESSION['clientData']['clientLevel']) <= 1) {
-    header('Location: /phpmotors/');
-    exit;
-}
+// // Check if user can see these pages, if not, send them back
+// if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || intval($_SESSION['clientData']['clientLevel']) <= 1) {
+//     header('Location: /phpmotors/');
+//     exit;
+// }
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -175,6 +175,17 @@ switch ($action) {
             header('location: /phpmotors/vehicles/');
             exit;
         }
+        break;
+    case 'classification':
+        $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
+        $vehicles = getVehiclesByClassification($classificationName);
+        if (!count($vehicles) || empty($vehicles)) {
+            $message = "<p class='notice'>Sorry, no $classificationName could be found.</p>";
+        } else {
+            $vehicleDisplay = buildVehiclesDisplay($vehicles);
+        }
+
+        include '../view/classification.php';
         break;
     default:
         $classificationListSelect = buildClassificationList($classificationList);

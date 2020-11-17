@@ -65,10 +65,10 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
                     <textarea cols="66" rows="4" name="invDescription" id="invDescription" required><?php echo (isset($data['invDescription']) && !empty($data['invDescription'])) ? $data['invDescription'] : (isset($invInfo['invDescription']) ? $invInfo['invDescription'] : '') ?></textarea><br>
 
                     <label for="invImage">Image Path:</label><br>
-                    <input type="text" id="invImage" name="invImage" value="/images/no-image.png"><br>
+                    <input type="text" id="invImage" name="invImage" value="/assets/images/no-image.png"><br>
 
                     <label for="invThumbnail">Thumbnail Path:</label><br>
-                    <input type="text" id="invThumbnail" name="invThumbnail" value="/images/no-image.png"><br>
+                    <input type="text" id="invThumbnail" name="invThumbnail" value="/assets/images/no-image.png"><br>
 
                     <label for="invPrice">* Price:</label><br>
                     <input type="number" min="0" step="0.01" id="invPrice" name="invPrice" value="<?php echo (isset($data['invPrice']) && !empty($data['invPrice'])) ? $data['invPrice'] : (isset($invInfo['invPrice']) ? $invInfo['invPrice'] : '') ?>" required><br>
