@@ -6,6 +6,8 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 // Get the Vehicles Model for use as needed
 require_once '../model/vehicles-model.php';
+// Get the Uploads Model for use as needed
+require_once '../model/uploads-model.php';
 // Get the functions library
 require_once '../library/functions.php';
 
@@ -191,14 +193,17 @@ switch ($action) {
         $invId = intval(filter_input(INPUT_GET, 'carId', FILTER_VALIDATE_INT));
         $vehicle = array();
         $vehicle = getInvItemInfo($invId);
+        $thumbnails = getImageThumbnails($invId);
 
         // var_dump($vehicle);
+        // var_dump($thumbnails);
         // exit;
 
         if (!$vehicle || !count($vehicle) || empty($vehicle)) {
             $message = "<p class='notice'>Sorry, the vehicle you are looking for could not be found.</p>";
         } else {
-            $vehicleHtml = buildVehicleDetail($vehicle);
+            $vehicleHtml = buildVehicleThumbnails($thumbnails);
+            $vehicleHtml .= buildVehicleDetail($vehicle);
         }
 
         include '../view/vehicle-detail.php';

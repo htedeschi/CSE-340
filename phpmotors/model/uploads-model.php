@@ -43,6 +43,25 @@ function getImages()
     return $imageArray;
 }
 
+// Get Thumbnails
+function getImageThumbnails($vehicleId)
+{
+    $db = phpmotorsConnect();
+
+    $sql = 'SELECT *
+            FROM images
+            WHERE   invId = :invId AND
+                    imgName LIKE \'%-tn.%\'';
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $vehicleId, PDO::PARAM_INT);
+    $stmt->execute();
+    $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+
+    return $images;
+}
+
 // Delete image information from the images table
 function deleteImage($imgId)
 {

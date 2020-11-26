@@ -80,7 +80,7 @@ function buildVehiclesDisplay($vehicles)
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
         $dv .= '<li>';
-        $dv .= "<a href='/phpmotors/vehicles/?action=detail&carId=$vehicle[invId]'><img class='car-thumbnail' src='/phpmotors$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></a>";
+        $dv .= "<a href='/phpmotors/vehicles/?action=detail&carId=$vehicle[invId]'><img class='car-thumbnail' onerror=\"this.onerror=null; this.src='/phpmotors/assets/images/no-image.png'\" src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></a>";
         $dv .= '<hr>';
         $dv .= "<h2><a href='/phpmotors/vehicles/?action=detail&carId=$vehicle[invId]'>$vehicle[invMake] $vehicle[invModel]</a></h2>";
         $dv .= "<span>\$$vehicle[invPrice]</span>";
@@ -90,11 +90,24 @@ function buildVehiclesDisplay($vehicles)
     return $dv;
 }
 
+# builds a display of the thumbnails for the vehicle selected
+function buildVehicleThumbnails($thumbnails)
+{
+    $html = '<div class="thumbnails"><h3>Pictures</h3>';
+
+    foreach ($thumbnails as $key => $value) {
+        $html .= '<img src="'.$value['imgPath'].'" alt="Thumbnail">';
+    }
+
+    $html .= '</div>';
+    return $html;
+}
+
 # builds a display of the details for the vehicle selected
 function buildVehicleDetail($vehicle)
 {
     return "<div class='pictures'>
-                <img src='/phpmotors$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>
+                <img src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com' onerror=\"this.onerror=null; this.src='/phpmotors/assets/images/no-image.png'\">
             </div>
             <div class='details'>
                 <h1>$vehicle[invMake] $vehicle[invModel]</h1>

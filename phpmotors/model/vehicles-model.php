@@ -128,7 +128,7 @@ function deleteVehicle($data)
 function getInventoryByClassification($classificationId)
 {
     $db = phpmotorsConnect();
-    $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId';
+    $sql = 'SELECT * FROM inventory WHERE classificationId = :classificationId';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
     $stmt->execute();
@@ -141,7 +141,10 @@ function getInventoryByClassification($classificationId)
 function getInvItemInfo($invId)
 {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $sql = 'SELECT inv.invId, inv.invMake, inv.invModel, inv.invDescription, img.imgPath AS invImage, CONCAT(SUBSTRING(img.imgPath, 1, LENGTH(img.imgPath) - 4 ), \'-tn\', SUBSTRING(img.imgPath, LENGTH(img.imgPath) - 3 )) AS invThumbnail, inv.invPrice, inv.invStock, inv.invColor, inv.classificationId
+    FROM inventory inv
+    LEFT JOIN images img ON img.invId = inv.invId AND img.imgPrimary = 1 AND img.imgName NOT LIKE \'%-tn.%\'
+    WHERE inv.invId = :invId';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->execute();
@@ -154,18 +157,23 @@ function getInvItemInfo($invId)
 function getVehiclesByClassification($classificationName)
 {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * 
-            FROM inventory 
-            WHERE classificationId IN (
-                SELECT classificationId 
-                FROM carclassification 
-                WHERE classificationName = :classificationName
-                )';
+    $sql = 'SELECT inv.invId, inv.invMake, inv.invModel, inv.invDescription, img.imgPath AS invThumbnail, inv.invPrice, inv.invStock, inv.invColor, inv.classificationId
+    FROM inventory inv
+    LEFT JOIN images img ON img.invId = inv.invId AND img.imgName LIKE \'%-TN.%\' AND img.imgPrimary = 1
+    WHERE inv.classificationId IN (
+        SELECT classificationId 
+        FROM carclassification 
+        WHERE classificationName = :classificationName
+        )';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
     $stmt->execute();
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
+
+    // var_dump($vehicles);
+    // exit;
+
     return $vehicles;
 }
 
@@ -180,3 +188,25 @@ function getVehicles()
     $stmt->closeCursor();
     return $invInfo;
 }
+
+// function getVehicleImages($vehicleId)
+// {
+//     $db = phpmotorsConnect();
+
+//     $sql = 'SELECT img.imgPath, 
+// 	(SELECT imgPath 
+// 	    FROM images 
+// 	    WHERE invId = img.invId AND 
+// 	    imgName = CONCAT(SUBSTRING(img.imgName, 1, LENGTH(img.imgName) - 4 ), \'-tn\', SUBSTRING(img.imgName, LENGTH(img.imgName) - 3 ))) AS imgThumbnail
+//     FROM images img
+//     WHERE img.invId = :invId AND
+//         img.imgName NOT LIKE \'%-tn.%\'';
+
+//     $stmt = $db->prepare($sql);
+//     $stmt->bindValue(':invId', $vehicleId, PDO::PARAM_INT);
+//     $stmt->execute();
+//     $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     $stmt->closeCursor();
+
+//     return $images;
+// }

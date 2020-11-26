@@ -14,6 +14,7 @@ html {
 }
 
 .pictures img {
+    max-width: 500px;
     width: 100%;
 }
 
@@ -21,20 +22,48 @@ html {
     margin: 0 20px 0 20px;
 }
 
+.contaner {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-around;
+    flex-flow: column wrap;
+
+}
+
+.thumbnails {
+    order:3;
+}
+
 @media screen and (min-width: 768px) {
+    
+    .thumbnails {
+        flex-wrap: wrap;
+        order:0 ;
+        flex: 1;
+    }
+    
+    .thumbnails h3 {
+        display: none;
+    }
+
+    .thumbnails img:hover {
+        width: 150%;
+        position: relative;
+    }
     .contaner {
         display: flex;
         flex: 0 0 auto;
         justify-content: space-around;
+        flex-flow: row nowrap;
     }
 
     .pictures {
         margin: 5%;
-        flex: 1;
+        flex: 3;
     }
 
     .details {
         margin: 0 20px 0 20px;
-        flex: 1;
+        flex: 3;
     }
 }
