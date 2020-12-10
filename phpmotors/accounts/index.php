@@ -73,11 +73,15 @@ switch ($action) {
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
 
+        // "delete" cookie
+        setcookie("firstname", "", time() - 3600);
 
+        // set the firstname cookie
         setcookie("firstname", $_SESSION['clientData']['clientFirstname'], strtotime("+ 1 year"), "/");
 
         // Send them to the admin view
-        include '../view/admin.php';
+        // include '../view/admin.php';
+        header('Location: /phpmotors/accounts');
         exit;
         break;
 
@@ -163,7 +167,7 @@ switch ($action) {
         $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
         $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
-        
+
         if ($clientEmail !== $_SESSION['clientData']['clientEmail']) {
             if (checkExistingEmail($clientEmail)) {
                 $messageUpdAcc = '<p>That email address already exists. Use a different email.</p>';
@@ -171,15 +175,15 @@ switch ($action) {
                 exit;
             }
         }
-        
+
         $updateResult = updateClient($clientId, $clientFirstname, $clientLastname, $clientEmail);
-        
+
         if ($updateResult > 0) {
             $message = "<p class='green'>The user account was updated successfully</p>";
             $_SESSION['message'] = $message;
             // Query the client data based on the email address
             $clientData = getClientById($clientId);
-            
+
             // A valid user exists, log them in
             $_SESSION['loggedin'] = TRUE;
             // Remove the password from the array
@@ -188,7 +192,7 @@ switch ($action) {
             array_pop($clientData);
             // Store the array into the session
             $_SESSION['clientData'] = $clientData;
-            
+
             header('location: /phpmotors/accounts/');
             exit;
         } else {
@@ -197,8 +201,8 @@ switch ($action) {
             header('location: /phpmotors/accounts/');
             exit;
         }
-        
-    break;
+
+        break;
     case 'updatePasswrd':
         $clientId = intval(filter_input(INPUT_POST, 'cliId', FILTER_SANITIZE_NUMBER_INT));
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);

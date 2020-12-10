@@ -1,3 +1,11 @@
+<?php
+// Check if the firstname cookie exists, get its value
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    if (isset($_COOKIE['firstname'])) {
+        $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+    }
+}
+?>
 <div class="top">
     <div id="div-logo">
         <img src="/phpmotors/assets/images/site/logo.png" alt="PHP Motors Logo" />
@@ -15,7 +23,7 @@
         }
         ?>
 
-        
+
     </div>
 </div>
 <nav>

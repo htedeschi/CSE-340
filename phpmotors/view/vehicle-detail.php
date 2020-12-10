@@ -29,11 +29,35 @@ if (!$vehicle || !isset($vehicle) || count($vehicle) <= 0) {
                 <div class="contaner">
                     <?php echo (isset($vehicleHtml) ? $vehicleHtml : ""); ?>
                 </div>
+                <div class="reviews">
+                    <hr>
+                    <h2>Reviews</h2>
+                    <!-- Add new Review -->
+                    <?php
+                    echo '<p class="red">';
+                    echo (isset($_SESSION['message']) ? $_SESSION['message'] : '');
+                    echo '</p>';
+                    ?>
+                    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-add.php' ?>
+
+                    <!-- Get all reviews for this car -->
+                    <?php
+                    $reviews = getReviewsByInvId($vehicle['invId']);
+                    foreach ($reviews as $key => $review) {
+                    ?>
+                        <div class="review">
+                            <p class="head"><?php echo $review['screenName']; ?><small> wrote on </small><?php echo date("F j, Y",strtotime($review['reviewDate'])); ?></p>
+                            <p class="review-body"><?php echo $review['reviewText']; ?></p>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
             </main>
         </div>
-
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/includes/footer.php' ?>
     </div>
 </body>
 
 </html>
+<?php unset($_SESSION['message']); ?>

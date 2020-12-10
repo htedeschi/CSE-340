@@ -96,7 +96,7 @@ function buildVehicleThumbnails($thumbnails)
     $html = '<div class="thumbnails"><h3>Pictures</h3>';
 
     foreach ($thumbnails as $key => $value) {
-        $html .= '<img src="'.$value['imgPath'].'" alt="Thumbnail">';
+        $html .= '<img src="' . $value['imgPath'] . '" alt="Thumbnail">';
     }
 
     $html .= '</div>';
@@ -288,3 +288,15 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height)
     // Free any memory associated with the old image
     imagedestroy($old_image);
 } // ends resizeImage function
+
+function getReviewsByInvId(int $id): array
+{
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+    return getByInvId($id);
+}
+
+function getReviewsByClientId(int $id): array
+{
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/reviews-model.php';
+    return getByClientId($id);
+}

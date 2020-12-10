@@ -25,7 +25,7 @@ if (!$_SESSION['loggedin']) {
                 <p><?php echo ($_SESSION['loggedin'] ? 'You are logged in.' : ''); ?></p>
                 <?php
                 if (isset($_SESSION['message'])) {
-                    echo $_SESSION['message'];
+                    echo "<p class='red'>" . $_SESSION['message'] . "</p>";
                 }
                 ?>
                 <ul>
@@ -45,6 +45,21 @@ if (!$_SESSION['loggedin']) {
                     echo "<p><a href='/phpmotors/vehicles/'>Vehicle Management</a></p>";
                 }
                 ?>
+
+
+                <?php
+                $reviews = getReviewsByClientId($_SESSION['clientData']['clientId']);
+                if (count($reviews) > 0) {
+                ?>
+                    <h2>Manage Your Product Reviews</h2>
+                    <ul>
+                        <?php
+                        foreach ($reviews as $key => $review) {
+                            echo "<li>" . $review['invMake'] . " " . $review['invModel'] . "[Reviewed on " . date("F j, Y", strtotime($review['reviewDate'])) . "]: <a href='/phpmotors/reviews/?action=edit&reviewId=". $review['reviewId'] ."'>Edit</a> | <a href='/phpmotors/reviews/?action=delete&reviewId=". $review['reviewId'] ."'>Delete</a>" . "</li>";
+                        }
+                        ?>
+                    </ul>
+                <?php } ?>
             </main>
         </div>
 

@@ -27,7 +27,7 @@
                 ?>
 
 
-                <form action="#" method="post">
+                <form action="" method="post">
                     <!-- action name for registering -->
                     <input type="hidden" name="action" value="loginPost">
 

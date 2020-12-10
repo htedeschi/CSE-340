@@ -27,21 +27,32 @@ html {
     flex: 0 0 auto;
     justify-content: space-around;
     flex-flow: column wrap;
-
 }
 
 .thumbnails {
-    order:3;
+    order: 3;
+}
+
+.review {
+    background-color: #ecec6d;
+    padding: 5px;
+    margin: 10px 0 10px;
+}
+
+p.review-body {
+    width: 90%;
+    background-color: white;
+    margin-left: 2%;
+    padding: 10px;
 }
 
 @media screen and (min-width: 768px) {
-    
     .thumbnails {
         flex-wrap: wrap;
-        order:0 ;
+        order: 0;
         flex: 1;
     }
-    
+
     .thumbnails h3 {
         display: none;
     }
