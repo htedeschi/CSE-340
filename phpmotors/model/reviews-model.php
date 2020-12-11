@@ -151,7 +151,7 @@ function getByInvId(int $id): array
     FROM reviews r
     JOIN clients c ON r.clientId = c.clientId
     WHERE r.invId = :invId
-    ORDER BY r.reviewDate';
+    ORDER BY r.reviewDate DESC';
 
     $stmt = $db->prepare($sql);
 
@@ -181,7 +181,7 @@ function getByClientId(int $id): array
     FROM reviews r
     JOIN inventory i ON r.invId = i.invId
     WHERE r.clientId = :clientId
-    ORDER BY r.reviewDate';
+    ORDER BY r.reviewDate DESC';
 
     $stmt = $db->prepare($sql);
 

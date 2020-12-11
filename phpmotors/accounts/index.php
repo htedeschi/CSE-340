@@ -74,10 +74,10 @@ switch ($action) {
         $_SESSION['clientData'] = $clientData;
 
         // "delete" cookie
-        setcookie("firstname", "", time() - 3600);
-
+        setcookie("firstname", null, time() - 3600, "/");
+        unset($_COOKIE['firstname']);
         // set the firstname cookie
-        setcookie("firstname", $_SESSION['clientData']['clientFirstname'], strtotime("+ 1 year"), "/");
+        // setcookie("firstname", $_SESSION['clientData']['clientFirstname'], strtotime("+ 1 year"), "/");
 
         // Send them to the admin view
         // include '../view/admin.php';
@@ -153,7 +153,7 @@ switch ($action) {
         break;
 
     case 'logout':
-        setcookie("firstname", "", strtotime("- 1 hour"), "/");
+        setcookie("firstname", $_SESSION['clientData']['clientFirstname'], strtotime("+ 1 hour"), "/");
         session_destroy();
         header('Location: /phpmotors/');
         exit;

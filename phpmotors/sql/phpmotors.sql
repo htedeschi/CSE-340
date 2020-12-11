@@ -50,13 +50,14 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `comment` text DEFAULT NULL,
   PRIMARY KEY (`clientId`),
   UNIQUE KEY `clientEmail` (`clientEmail`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table phpmotors.clients: ~0 rows (approximately)
 DELETE FROM `clients`;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
 INSERT INTO `clients` (`clientId`, `clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `clientLevel`, `comment`) VALUES
-	(1, 'Henrique', 'Tedeschi', 'henrique.tedeschi@gmail.com', '$2y$10$p.ZcSNMFizJ5yO3Od3S4MO3ei8tRt5fRHF2.r1zX/bV/m/xP.cKCq', '3', NULL);
+	(1, 'Henrique', 'Tedeschi', 'henrique.tedeschi@gmail.com', '$2y$10$p.ZcSNMFizJ5yO3Od3S4MO3ei8tRt5fRHF2.r1zX/bV/m/xP.cKCq', '3', NULL),
+	(2, 'John', 'Doe', 'jdoe@motors.com', '$2y$10$A8eC70dgzECYkk8G8ruto.UU5u90.e3SKEPNnr1C29YcQ04tDSG0i', '1', NULL);
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 
 -- Dumping structure for table phpmotors.images
@@ -76,42 +77,42 @@ CREATE TABLE IF NOT EXISTS `images` (
 DELETE FROM `images`;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
 INSERT INTO `images` (`imgId`, `invId`, `imgName`, `imgPath`, `imgDate`, `imgPrimary`) VALUES
-	(1, 13, 'aerocar.jpg', '/phpmotors/assets/images/vehicles/aerocar.jpg', '2020-11-25 21:57:36', 1),
-	(2, 13, 'aerocar-tn.jpg', '/phpmotors/assets/images/vehicles/aerocar-tn.jpg', '2020-11-25 21:57:36', 1),
-	(3, 6, 'batmobile.jpg', '/phpmotors/assets/images/vehicles/batmobile.jpg', '2020-11-25 21:57:52', 1),
-	(4, 6, 'batmobile-tn.jpg', '/phpmotors/assets/images/vehicles/batmobile-tn.jpg', '2020-11-25 21:57:52', 1),
-	(5, 10, 'camaro.jpg', '/phpmotors/assets/images/vehicles/camaro.jpg', '2020-11-25 21:58:07', 1),
-	(6, 10, 'camaro-tn.jpg', '/phpmotors/assets/images/vehicles/camaro-tn.jpg', '2020-11-25 21:58:07', 1),
-	(7, 9, 'crwn-vic.jpg', '/phpmotors/assets/images/vehicles/crwn-vic.jpg', '2020-11-25 21:58:31', 1),
-	(8, 9, 'crwn-vic-tn.jpg', '/phpmotors/assets/images/vehicles/crwn-vic-tn.jpg', '2020-11-25 21:58:31', 1),
-	(9, 15, 'dog.jpg', '/phpmotors/assets/images/vehicles/dog.jpg', '2020-11-25 21:59:09', 1),
-	(10, 15, 'dog-tn.jpg', '/phpmotors/assets/images/vehicles/dog-tn.jpg', '2020-11-25 21:59:09', 1),
-	(11, 11, 'escalade.jpg', '/phpmotors/assets/images/vehicles/escalade.jpg', '2020-11-25 21:59:29', 1),
-	(12, 11, 'escalade-tn.jpg', '/phpmotors/assets/images/vehicles/escalade-tn.jpg', '2020-11-25 21:59:29', 1),
-	(13, 8, 'fire-truck.jpg', '/phpmotors/assets/images/vehicles/fire-truck.jpg', '2020-11-25 21:59:48', 1),
-	(14, 8, 'fire-truck-tn.jpg', '/phpmotors/assets/images/vehicles/fire-truck-tn.jpg', '2020-11-25 21:59:48', 1),
-	(15, 12, 'hummer.jpg', '/phpmotors/assets/images/vehicles/hummer.jpg', '2020-11-25 22:00:01', 1),
-	(16, 12, 'hummer-tn.jpg', '/phpmotors/assets/images/vehicles/hummer-tn.jpg', '2020-11-25 22:00:01', 1),
-	(17, 3, 'lambo-Adve.jpg', '/phpmotors/assets/images/vehicles/lambo-Adve.jpg', '2020-11-25 22:00:12', 1),
-	(18, 3, 'lambo-Adve-tn.jpg', '/phpmotors/assets/images/vehicles/lambo-Adve-tn.jpg', '2020-11-25 22:00:12', 1),
-	(19, 5, 'mechanic.jpg', '/phpmotors/assets/images/vehicles/mechanic.jpg', '2020-11-25 22:00:21', 1),
-	(20, 5, 'mechanic-tn.jpg', '/phpmotors/assets/images/vehicles/mechanic-tn.jpg', '2020-11-25 22:00:21', 1),
-	(21, 2, 'model-t.jpg', '/phpmotors/assets/images/vehicles/model-t.jpg', '2020-11-25 22:00:35', 1),
-	(22, 2, 'model-t-tn.jpg', '/phpmotors/assets/images/vehicles/model-t-tn.jpg', '2020-11-25 22:00:35', 1),
-	(23, 4, 'monster-truck.jpg', '/phpmotors/assets/images/vehicles/monster-truck.jpg', '2020-11-25 22:00:55', 1),
-	(24, 4, 'monster-truck-tn.jpg', '/phpmotors/assets/images/vehicles/monster-truck-tn.jpg', '2020-11-25 22:00:55', 1),
-	(25, 7, 'mystery-van.jpg', '/phpmotors/assets/images/vehicles/mystery-van.jpg', '2020-11-25 22:01:07', 1),
-	(26, 7, 'mystery-van-tn.jpg', '/phpmotors/assets/images/vehicles/mystery-van-tn.jpg', '2020-11-25 22:01:07', 1),
-	(27, 14, 'van.jpg', '/phpmotors/assets/images/vehicles/van.jpg', '2020-11-25 22:01:19', 1),
-	(28, 14, 'van-tn.jpg', '/phpmotors/assets/images/vehicles/van-tn.jpg', '2020-11-25 22:01:19', 1),
-	(29, 1, 'wrangler.jpg', '/phpmotors/assets/images/vehicles/wrangler.jpg', '2020-11-25 22:01:31', 1),
-	(30, 1, 'wrangler-tn.jpg', '/phpmotors/assets/images/vehicles/wrangler-tn.jpg', '2020-11-25 22:01:31', 1),
-	(31, 3, 'lambo-s.jpg', '/phpmotors/assets/images/vehicles/lambo-s.jpg', '2020-11-26 11:06:23', 0),
-	(32, 3, 'lambo-s-tn.jpg', '/phpmotors/assets/images/vehicles/lambo-s-tn.jpg', '2020-11-26 11:06:23', 0),
-	(33, 1, 'jeep.png', '/phpmotors/assets/images/vehicles/jeep.png', '2020-11-26 13:34:14', 0),
-	(34, 1, 'jeep-tn.png', '/phpmotors/assets/images/vehicles/jeep-tn.png', '2020-11-26 13:34:14', 0),
-	(35, 4, 'monster.jpg', '/phpmotors/assets/images/vehicles/monster.jpg', '2020-11-26 13:34:51', 0),
-	(36, 4, 'monster-tn.jpg', '/phpmotors/assets/images/vehicles/monster-tn.jpg', '2020-11-26 13:34:51', 0);
+	(1, 13, 'aerocar.jpg', '/phpmotors/assets/images/vehicles/aerocar.jpg', '2020-11-25 14:57:36', 1),
+	(2, 13, 'aerocar-tn.jpg', '/phpmotors/assets/images/vehicles/aerocar-tn.jpg', '2020-11-25 14:57:36', 1),
+	(3, 6, 'batmobile.jpg', '/phpmotors/assets/images/vehicles/batmobile.jpg', '2020-11-25 14:57:52', 1),
+	(4, 6, 'batmobile-tn.jpg', '/phpmotors/assets/images/vehicles/batmobile-tn.jpg', '2020-11-25 14:57:52', 1),
+	(5, 10, 'camaro.jpg', '/phpmotors/assets/images/vehicles/camaro.jpg', '2020-11-25 14:58:07', 1),
+	(6, 10, 'camaro-tn.jpg', '/phpmotors/assets/images/vehicles/camaro-tn.jpg', '2020-11-25 14:58:07', 1),
+	(7, 9, 'crwn-vic.jpg', '/phpmotors/assets/images/vehicles/crwn-vic.jpg', '2020-11-25 14:58:31', 1),
+	(8, 9, 'crwn-vic-tn.jpg', '/phpmotors/assets/images/vehicles/crwn-vic-tn.jpg', '2020-11-25 14:58:31', 1),
+	(9, 15, 'dog.jpg', '/phpmotors/assets/images/vehicles/dog.jpg', '2020-11-25 14:59:09', 1),
+	(10, 15, 'dog-tn.jpg', '/phpmotors/assets/images/vehicles/dog-tn.jpg', '2020-11-25 14:59:09', 1),
+	(11, 11, 'escalade.jpg', '/phpmotors/assets/images/vehicles/escalade.jpg', '2020-11-25 14:59:29', 1),
+	(12, 11, 'escalade-tn.jpg', '/phpmotors/assets/images/vehicles/escalade-tn.jpg', '2020-11-25 14:59:29', 1),
+	(13, 8, 'fire-truck.jpg', '/phpmotors/assets/images/vehicles/fire-truck.jpg', '2020-11-25 14:59:48', 1),
+	(14, 8, 'fire-truck-tn.jpg', '/phpmotors/assets/images/vehicles/fire-truck-tn.jpg', '2020-11-25 14:59:48', 1),
+	(15, 12, 'hummer.jpg', '/phpmotors/assets/images/vehicles/hummer.jpg', '2020-11-25 15:00:01', 1),
+	(16, 12, 'hummer-tn.jpg', '/phpmotors/assets/images/vehicles/hummer-tn.jpg', '2020-11-25 15:00:01', 1),
+	(17, 3, 'lambo-Adve.jpg', '/phpmotors/assets/images/vehicles/lambo-Adve.jpg', '2020-11-25 15:00:12', 1),
+	(18, 3, 'lambo-Adve-tn.jpg', '/phpmotors/assets/images/vehicles/lambo-Adve-tn.jpg', '2020-11-25 15:00:12', 1),
+	(19, 5, 'mechanic.jpg', '/phpmotors/assets/images/vehicles/mechanic.jpg', '2020-11-25 15:00:21', 1),
+	(20, 5, 'mechanic-tn.jpg', '/phpmotors/assets/images/vehicles/mechanic-tn.jpg', '2020-11-25 15:00:21', 1),
+	(21, 2, 'model-t.jpg', '/phpmotors/assets/images/vehicles/model-t.jpg', '2020-11-25 15:00:35', 1),
+	(22, 2, 'model-t-tn.jpg', '/phpmotors/assets/images/vehicles/model-t-tn.jpg', '2020-11-25 15:00:35', 1),
+	(23, 4, 'monster-truck.jpg', '/phpmotors/assets/images/vehicles/monster-truck.jpg', '2020-11-25 15:00:55', 1),
+	(24, 4, 'monster-truck-tn.jpg', '/phpmotors/assets/images/vehicles/monster-truck-tn.jpg', '2020-11-25 15:00:55', 1),
+	(25, 7, 'mystery-van.jpg', '/phpmotors/assets/images/vehicles/mystery-van.jpg', '2020-11-25 15:01:07', 1),
+	(26, 7, 'mystery-van-tn.jpg', '/phpmotors/assets/images/vehicles/mystery-van-tn.jpg', '2020-11-25 15:01:07', 1),
+	(27, 14, 'van.jpg', '/phpmotors/assets/images/vehicles/van.jpg', '2020-11-25 15:01:19', 1),
+	(28, 14, 'van-tn.jpg', '/phpmotors/assets/images/vehicles/van-tn.jpg', '2020-11-25 15:01:19', 1),
+	(29, 1, 'wrangler.jpg', '/phpmotors/assets/images/vehicles/wrangler.jpg', '2020-11-25 15:01:31', 1),
+	(30, 1, 'wrangler-tn.jpg', '/phpmotors/assets/images/vehicles/wrangler-tn.jpg', '2020-11-25 15:01:31', 1),
+	(31, 3, 'lambo-s.jpg', '/phpmotors/assets/images/vehicles/lambo-s.jpg', '2020-11-26 04:06:23', 0),
+	(32, 3, 'lambo-s-tn.jpg', '/phpmotors/assets/images/vehicles/lambo-s-tn.jpg', '2020-11-26 04:06:23', 0),
+	(33, 1, 'jeep.png', '/phpmotors/assets/images/vehicles/jeep.png', '2020-11-26 06:34:14', 0),
+	(34, 1, 'jeep-tn.png', '/phpmotors/assets/images/vehicles/jeep-tn.png', '2020-11-26 06:34:14', 0),
+	(35, 4, 'monster.jpg', '/phpmotors/assets/images/vehicles/monster.jpg', '2020-11-26 06:34:51', 0),
+	(36, 4, 'monster-tn.jpg', '/phpmotors/assets/images/vehicles/monster-tn.jpg', '2020-11-26 06:34:51', 0);
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 
 -- Dumping structure for table phpmotors.inventory
@@ -165,11 +166,14 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   PRIMARY KEY (`reviewId`),
   KEY `FK__inventory` (`invId`),
   KEY `FK__clients` (`clientId`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
--- Dumping data for table phpmotors.reviews: 0 rows
+-- Dumping data for table phpmotors.reviews: 1 rows
 DELETE FROM `reviews`;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
+INSERT INTO `reviews` (`reviewId`, `reviewText`, `reviewDate`, `invId`, `clientId`) VALUES
+	(8, 'Old amazing Ford T', '2020-12-10 22:17:22', 2, 1),
+	(10, 'Order fixed', '2020-12-10 22:19:58', 2, 2);
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
